@@ -94,8 +94,9 @@ class FlaskAPI(Flask):
                 if isinstance(e, typecheck):
                     return handler(e)
         else:
-            for typecheck, handler in chain(blueprint_handlers.items(), app_handlers.items()):
-                if isinstance(e, typecheck):
+            for typecheck, handler in chain(dict(blueprint_handlers).items(),
+                    dict(app_handlers).items()):
+                 if isinstance(e, typecheck):
                     return handler(e)
 
         reraise(exc_type, exc_value, tb)
